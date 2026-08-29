@@ -1,0 +1,3 @@
+
+        cout<< sum + k <<endl ;
+    
