@@ -75,50 +75,42 @@ int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
 void solve() {
-    ll s , q ;
-    cin>> s >> q ;
 
-    vector<pair<ll, ll>> fact ;
+    int n ;
+    cin>> n ;
 
-    for(ll i = 1 ; i * i <= s ; i++){
-        if(s % i == 0){
-            fact.pb({i, s/ i}) ;
-            if(i != s / i){
-                fact.pb({s/i, i});
-            }
-        }
-    }
+    vector<int> a(n);
+    for(auto &it : a) cin>> it ;
 
-    sort(fact.begin(), fact.end());
+    int left = 0 ;
 
-    
-    while(q--){
-        ll x, y ;
-        cin>> x >> y ;
-        
+    vector<int> ans(n);
 
-        ll max_area = 0 ;
-        ll prev = 0 ;
+    while(left < n){
+        int right = left + 1 ;
 
-        for(ll i = 0 ; i < fact.size() ; i++){
-            ll curr_x = min(fact[i].ff, x);
-            ll curr_y = min(fact[i].ss, y);
-
-            if(curr_x > prev){
-                max_area += (curr_x - prev) * curr_y ; 
-                prev = curr_x ;
-            }
-
-            if(fact[i].ff >= x) break ;
+        while(right < n && a[left] == a[right]){
+            right++ ;
         }
 
+        right-- ;
 
-        cout<< max_area <<endl ;
+        if(left == right){
+            cout<< -1 <<endl ;
+            return ;
+        }
 
-         
+        ans[left] = right + 1 ;
+        for(int i = left + 1 ; i <= right ; i++){
+            ans[i] = i ;
+        }
+
+        left = right + 1 ;
+
     }
 
-
+    for(auto &it : ans) cout<< it <<" ";
+    cout<< endl ;
 
 }
 
