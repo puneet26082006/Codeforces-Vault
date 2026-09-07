@@ -167,15 +167,6 @@ int knighty[8] = {-2, -1, 1, 2, 2, 1, -1, -2};
 
 
 
-bool helper(int k, string & s, int extra, vector<int>& pre, int n){
-    for(int i = 0 ; i <= n - k ; i++){
-        if(pre[i + k] - pre[i] == extra){
-            return true ;
-        }
-    }
-
-    return false ;
-}
 
 void solve()
 {
@@ -190,29 +181,26 @@ void solve()
         pre[i + 1] = pre[i] + (s[i] == 'a' ? 1 : -1 ) ;  
     }
 
-    int extra = pre[n] ;
-
-    if(extra == 0){
+    int diff = pre[n];
+    if(diff == 0){
         cout<< 0 <<endl ;
         return ;
     }
 
-    int si = 1 ;
-    int ei = n - 1 ;
-
-    int ans = -1 ;
-
-    while(si <= ei){
-        int mid = (si + ei)/ 2 ;
-        if(helper(mid, s, extra, pre, n)){
-            ans = mid ;
-            ei = mid - 1 ;
-        } else {
-            si = mid + 1 ;
+    map<int, int> mp ;
+    mp[0] = 0 ;
+    int min_len = n + 1 ;
+    for(int i = 1 ; i <= n ; i++){
+        int need = pre[i] - diff ;
+        if((mp.count(need))){
+            min_len = min(min_len, i - mp[need]);
         }
+
+        mp[pre[i]] = i ;
     }
 
-    cout<< ans <<endl ;
+    cout<< ((min_len >= n) ? -1 : min_len) <<endl ;
+
 }
 
 int main()
