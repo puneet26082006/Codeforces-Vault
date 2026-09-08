@@ -76,11 +76,34 @@ int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 void solve() {
 
+    int a , b ;
+    cin>> a >> b ;
+
+    int ans = 1e9 ;
+
+    for(int i = 0 ; i <= 30 ; i++){
+        int curr_b = b + i ;
+        int curr_a = a ;
+
+        if(curr_b == 1) continue ;
+
+        int op = i ;
+
+        while(curr_a > 0){
+            curr_a /= curr_b ;
+            op++ ;
+        }
+
+        ans = min(ans, op) ;
+
+
+    }
+
+    cout<< ans <<endl ;
 
 
 
 }
-
 
 
 
@@ -93,7 +116,7 @@ int main() {
     fastio();
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }
