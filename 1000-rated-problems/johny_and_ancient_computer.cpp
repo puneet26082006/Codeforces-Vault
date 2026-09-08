@@ -75,25 +75,71 @@ int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
 void solve() {
-    int n ;
-    cin>> n ;
+    ll a, b ;
+    cin>> a >> b ;
 
-    string s ;
-    cin>> s ;
-
-    int sum = 0 ;
-    int ans = 0 ;
-
-    for(int i = 0 ; i < n ; i++){
-        sum += ((s[i] == '(') ? 1 : -1) ;
-
-        if(sum < 0){
-            ans++ ;
-            sum = 0 ;
-        }
+    if(a == b){
+        cout<< 0 <<endl ;
+        return ;
     }
 
-    cout<< sum <<endl ;
+    ll mx = max(a, b) ;
+    ll target = -1 ;
+    if(mx == a){
+        target = b ;
+    } else {
+        target = a ;
+    }
+
+    ll op = 0 ;
+
+    while(mx > 0){
+        if(mx % 8 == 0 && (mx / 8) % target == 0 ){
+            mx /= 8 ;
+            op++ ;
+
+            if(mx == target){
+                cout<< op <<endl ;
+                return ;
+            } else if(mx < target){
+                cout<< -1 <<endl ;
+                return ;
+            }
+            continue ;
+        }
+
+        if(mx % 4 == 0 && (mx / 4) % target == 0){
+            mx /= 4 ;
+            op++ ;
+
+            if(mx == target){
+                cout<< op <<endl ;
+                return ;
+            } else if(mx < target){
+                cout<< -1 <<endl ;
+                return ;
+            }
+            continue ;
+        }
+
+        if(mx % 2 == 0 && (mx / 2) % target == 0){
+            mx /= 2 ;
+
+            op++ ;
+
+            if(mx == target){
+                cout<< op <<endl ;
+                return ;
+            } else if(mx < target){
+                cout<< -1 <<endl ;
+                return ;
+            }
+            continue ;
+        }
+
+        cout<< -1 <<endl ;
+        return ;
+    }
 
 
 

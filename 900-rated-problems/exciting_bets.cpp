@@ -75,26 +75,21 @@ int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
 void solve() {
-    int n ;
-    cin>> n ;
 
-    string s ;
-    cin>> s ;
+    ll a, b ;
+    cin>> a >> b ;
 
-    int sum = 0 ;
-    int ans = 0 ;
-
-    for(int i = 0 ; i < n ; i++){
-        sum += ((s[i] == '(') ? 1 : -1) ;
-
-        if(sum < 0){
-            ans++ ;
-            sum = 0 ;
-        }
+    if(a == b){
+        cout<< 0 <<" "<< 0 <<endl ;
+        return ;
     }
 
-    cout<< sum <<endl ;
-
+    ll diff = abs(a - b) ;
+    ll ans = min(diff - (a % diff), a % diff) ;
+    cout<< diff <<" "<<ans ;
+    
+    cout<<endl ;
+    
 
 
 }

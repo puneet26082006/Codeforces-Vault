@@ -78,22 +78,13 @@ void solve() {
     int n ;
     cin>> n ;
 
-    string s ;
-    cin>> s ;
+    vector<int> a(n) ;
+    for(auto &it : a) cin>> it ;
 
-    int sum = 0 ;
-    int ans = 0 ;
+    sort(a.rbegin(), a.rend());
 
-    for(int i = 0 ; i < n ; i++){
-        sum += ((s[i] == '(') ? 1 : -1) ;
-
-        if(sum < 0){
-            ans++ ;
-            sum = 0 ;
-        }
-    }
-
-    cout<< sum <<endl ;
+    for(auto &it : a) cout<< it <<" ";
+    cout<<endl ;
 
 
 

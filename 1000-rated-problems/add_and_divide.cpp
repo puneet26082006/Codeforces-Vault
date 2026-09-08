@@ -75,25 +75,7 @@ int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
 void solve() {
-    int n ;
-    cin>> n ;
 
-    string s ;
-    cin>> s ;
-
-    int sum = 0 ;
-    int ans = 0 ;
-
-    for(int i = 0 ; i < n ; i++){
-        sum += ((s[i] == '(') ? 1 : -1) ;
-
-        if(sum < 0){
-            ans++ ;
-            sum = 0 ;
-        }
-    }
-
-    cout<< sum <<endl ;
 
 
 
@@ -111,7 +93,7 @@ int main() {
     fastio();
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }

@@ -81,19 +81,22 @@ void solve() {
     string s ;
     cin>> s ;
 
-    int sum = 0 ;
-    int ans = 0 ;
+    char mx = 'a';
+    int idx = -1 ;
 
     for(int i = 0 ; i < n ; i++){
-        sum += ((s[i] == '(') ? 1 : -1) ;
-
-        if(sum < 0){
-            ans++ ;
-            sum = 0 ;
+        char curr = s[i] ;
+        if(curr >= mx){
+            mx = curr ;
+            idx = i ;
+        } else {
+            cout<< "YES" <<endl ;
+            cout<< idx + 1 <<" "<< i + 1 <<endl ;
+            return ;
         }
     }
 
-    cout<< sum <<endl ;
+    cout<< "NO" <<endl ;
 
 
 
@@ -111,7 +114,7 @@ int main() {
     fastio();
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }
