@@ -75,6 +75,24 @@ int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
 void solve() {
+    int n ;
+    cin>> n ;
+
+    int pow = 1 ;
+    while(pow * 2 <= n - 1){
+        pow *= 2 ;
+    }
+
+    for(int i = n - 1 ; i >= pow ; i--){
+        cout<< i <<" ";
+    }
+
+    for(int i = 0 ; i < pow ; i++){
+        cout<< i <<" " ;
+    }
+
+    cout<<endl ;
+
 
 
 
@@ -93,7 +111,7 @@ int main() {
     fastio();
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }
