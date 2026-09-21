@@ -72,15 +72,42 @@ int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
 
+const int N = 1e6 ;
+int spf[N];
+int cost[N];
+int div[N] ;
+
+
 
 
 void solve() {
-    ll a, b , c ;
-    cin>> a >> b >> c ;
+    int n ;
+    cin>> n ;
 
-    ll ans = max(abs((a + c) - b), abs(a - b));
+    vector<int> a(n) ;
+    for(auto &it : a) cin>> it ;
 
-    cout<< ans <<endl ;
+    vector<int> c(n);
+    for(int i = 0 ; i < n ; i++){
+        c[i] = (a[i] - (i + 1)) ;
+    }
+
+    sort(c.begin(), c.end());
+    c.erase(unique(c.begin(), c.end()), c.end()) ;
+
+    int len = 1 ;
+    int ans = 1 ;
+    for(int i = 1 ; i < c.size() ; i++){
+        if(c[i] == c[i - 1] + 1){
+            len++ ;
+        } else {
+            len = 1 ;
+        }
+
+        ans = max(ans, len) ;
+    }
+
+    cout<< ans << endl ;
 
 
 

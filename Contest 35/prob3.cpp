@@ -75,10 +75,40 @@ int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
 void solve() {
-    ll a, b , c ;
-    cin>> a >> b >> c ;
+    int n ;
+    cin>> n ;
 
-    ll ans = max(abs((a + c) - b), abs(a - b));
+    string s ;
+    cin>> s ;
+
+    if(s[0] == '1'){
+        int ans = 0 ;
+        for(int i = 0 ; i < n ; i++){
+            if(s[i] == '0'){
+                ans++ ;
+            }
+        }
+
+        cout<< ans <<endl ;
+        return ;
+    }
+
+    int zero = 0 ;
+    for(int i = 0 ; i < n ; i++){
+        if(s[i] == '0') zero++ ;
+    }
+    
+    int ans = n ;
+    int rem = zero ;
+    int one = 0 ;
+    for(int i = 0 ; i < n ; i++){
+        if(s[i] == '0'){
+            rem-- ;
+        } else {
+            one++ ;
+        }
+        ans = min(ans, one + rem) ;
+    }
 
     cout<< ans <<endl ;
 

@@ -71,16 +71,70 @@ int knightx[8] = { -1, -2, -2, -1, 1, 2, 2, 1};
 int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
+const ll N = 1e6 ;
+ll spf[N] ;
+ll cost[N] ;
 
+void precompute(){
+    for(ll i = 0 ; i < N ; i++){
+        spf[i] = i ;
+    }
 
+    for(ll i = 2 ; i * i <= N ; i++){
+        if(spf[i] == i){
+            for(ll j = i * i ; j <= N ; j += i){
+                if(spf[j] == j) spf[j] = i ;
+            }
+        }
+    }
+
+    cost[1] = 0 ;
+    for(ll i = 2 ; i < N ; i++){
+        cost[i] = 1 + spf[i] * cost[i / spf[i]] ; 
+    }
+
+}
 
 void solve() {
-    ll a, b , c ;
-    cin>> a >> b >> c ;
 
-    ll ans = max(abs((a + c) - b), abs(a - b));
+    ll n , k ;
+    cin>> n >> k ;
+
+    vector<ll> a(n) ;
+    for(auto &it : a) cin>> it ;
+
+    ll ans = 0 ;
+
+    for(auto &it : a){
+        ll mn = -1 ;
+        
+        for(ll i = 1 ; i * i <= it ; i++){
+            if(it % i == 0){
+                ll div1 = i ;
+                ll div2 = it / i ;
+
+                if(div1 <= k){
+                    ll curr = cost[it / div1] ;
+                    if(mn == -1 || curr < mn){
+                        mn = curr ;
+                    }
+                }
+
+                if(div2 <= k){
+                    ll curr = cost[it / div2];
+                    if(mn == -1 || curr < mn){
+                        mn = curr ;
+                    }
+                }
+            }
+        }
+
+        ans += mn ;
+    }
+
 
     cout<< ans <<endl ;
+
 
 
 
@@ -96,6 +150,8 @@ int main() {
     freopen("Error.txt", "w", stderr);
 #endif
     fastio();
+
+    precompute() ;
 
     int t = 1;
     cin >> t;
