@@ -76,45 +76,6 @@ int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 void solve() {
 
-    ll n ;
-    cin>> n ;
-
-    vector<ll> a(n) ;
-    for(auto &it : a) cin>> it ;
-
-    ll d1 = a[0] , d2 = a[1] ;
-    
-    for(ll i = 0 ; i < n ; i+= 2){
-        d1 = __gcd(d1, a[i]);
-    }
-
-    for(ll i = 1 ; i < n ; i+= 2){
-        d2 = __gcd(d2, a[i]);
-    }
-
-    bool possible1 = true , possible2 = true ;
-    for(ll i = 0 ; i < n ; i+= 2){
-        if(a[i] % d2 == 0){
-            possible1 = false ;
-            break ;
-        }
-    }
-
-    for(ll i = 1 ; i < n ; i+= 2){
-        if(a[i] % d1 == 0){
-            possible2 = false ;
-            break ;
-        }
-    }
-
-    if(!possible1 && !possible2){
-        cout<< 0 <<endl ;
-    } else if(possible1){
-        cout<< d2 <<endl ;
-    } else if(possible2){ 
-        cout<< d1 <<endl ;
-    }
-
 
 
 
@@ -132,7 +93,7 @@ int main() {
     fastio();
 
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) {
         solve();
     }
