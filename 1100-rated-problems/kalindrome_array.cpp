@@ -71,38 +71,55 @@ int knightx[8] = { -1, -2, -2, -1, 1, 2, 2, 1};
 int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
-int col[51] ; 
+bool check(int num, vector<int>& a){
+    vector<int> temp ;
+    for(auto &it : a){
+        if(it != num){
+            temp.pb(it) ;
+        }
+    }
+
+    for(int i = 0 ; i < temp.size() / 2 ; i++){
+        if(temp[i] != temp[temp.size() - 1 - i]){
+            return false ;
+        }
+    }
+
+    return true ;
+}
+
 
 void solve() {
-    int n , q ;
-    cin>> n >> q ;
+    int n ;
+    cin>> n ;
 
     vector<int> a(n) ;
     for(auto &it : a) cin>> it ;
 
-    for(int i = 0 ; i < n ; i++){
-        if(col[a[i]] == 0){
-            col[a[i]] = i + 1 ;
-        }
-    }
+    int left = 0 , right  = n - 1 ;
 
-    while(q--){
-        int t ;
-        cin>> t ;
+    while(left <= right){
+        if(a[left] == a[right]){
+            left++ ;
+            right-- ;
+        } else {
+            bool possible1 = check(a[left], a) ;
+            bool possible2 = check(a[right], a) ;
 
-        int curr = col[t] ;
-        cout<< curr <<" ";
-        
-        for(int i = 1 ; i <= 50 ; i++){
-            if(col[i] != 0 && col[i] < curr){
-                col[i]++ ;
+            if(possible1 || possible2){
+                cout<< "YES" <<endl ;
+                return ;
+            } else {
+                cout<< "NO" <<endl ;
+                return ;
             }
+
         }
-        
-        col[t] = 1 ;
     }
 
-    cout<<endl ;
+    cout<< "YES" <<endl ;
+
+
 
 }
 
@@ -118,7 +135,7 @@ int main() {
     fastio();
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }

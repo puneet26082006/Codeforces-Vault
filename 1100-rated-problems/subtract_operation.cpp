@@ -71,38 +71,40 @@ int knightx[8] = { -1, -2, -2, -1, 1, 2, 2, 1};
 int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
-int col[51] ; 
+
+
 
 void solve() {
-    int n , q ;
-    cin>> n >> q ;
+    int n , k;
+    cin>> n >> k ;
 
     vector<int> a(n) ;
     for(auto &it : a) cin>> it ;
 
-    for(int i = 0 ; i < n ; i++){
-        if(col[a[i]] == 0){
-            col[a[i]] = i + 1 ;
+    sort(a.begin(), a.end()) ;
+
+    int left = 0, right = 1 ;
+
+    while(left < n && right < n){
+        if(left == right){
+            right++ ;
+            continue ;
+        }
+
+        int diff = a[right] - a[left] ;
+        if(diff == k){
+            cout<< "YES" <<endl ;
+            return ;
+        } else if(diff < k){
+            right++ ;
+        } else {
+            left++ ;
         }
     }
 
-    while(q--){
-        int t ;
-        cin>> t ;
+    cout<< "NO" <<endl ;
 
-        int curr = col[t] ;
-        cout<< curr <<" ";
-        
-        for(int i = 1 ; i <= 50 ; i++){
-            if(col[i] != 0 && col[i] < curr){
-                col[i]++ ;
-            }
-        }
-        
-        col[t] = 1 ;
-    }
 
-    cout<<endl ;
 
 }
 
@@ -118,7 +120,7 @@ int main() {
     fastio();
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }
