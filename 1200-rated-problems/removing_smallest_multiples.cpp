@@ -75,7 +75,28 @@ int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
 void solve() {
+    ll n ;
+    cin>> n ;
 
+    string s ;
+    cin>> s ;
+
+    ll ans = 0 ;
+
+    for(ll k = 1 ; k <= n ; k++){
+        for(ll i = k ; i <= n ; i += k){
+            if(s[i - 1] == '1'){
+                break ;
+            }
+
+            if(s[i - 1] == '0'){
+                s[i - 1] = '2' ;
+                ans += k ;
+            }
+        }
+    }
+
+    cout<< ans <<endl ;
 
 
 
@@ -94,7 +115,7 @@ int main() {
     fastio();
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }
