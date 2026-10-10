@@ -1,0 +1,8 @@
+ans 3
+ans 1
+ans 9
+ans 13
+ans 1
+ans 0
+ans 999999998
+ans 999999985
