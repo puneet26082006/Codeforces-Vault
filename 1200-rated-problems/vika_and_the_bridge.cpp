@@ -72,15 +72,40 @@ int knighty[8] = { -2, -1, 1, 2, 2, 1, -1, -2};
 
 
 bool helper(int x, vector<int>& a, int n, int k){
-    set<int> st ;
-    for(int i = 0 ; i < n ; i+= x){
-        st.insert(a[i]);
-        if(st.size() >= 3){
-            return false ;
+    vector<int> last(k + 1, 0);
+    vector<int> mx1(k + 1, 0);
+    vector<int> mx2(k + 1, 0);
+
+    for(int i = 1 ; i <= n ; i++){
+        int c = a[i - 1] ;
+        int gap = i - last[c] - 1 ;
+
+        if(gap > mx1[c]){
+            mx2[c] = mx1[c] ;
+            mx1[c] = gap ;
+        } else if(gap > mx2[c]){
+            mx2[c] = gap ;
+        }
+
+        last[c] = i ;
+    }
+
+    for(int i = 1 ; i <= k ; i++){
+        int gap = n - last[i]  ;
+
+        if(gap > mx1[i]){
+            mx2[i] = mx1[i] ;
+            mx1[i] = gap ;
+        } else if(gap > mx2[i]){
+            mx2[i] = gap ;
+        }
+
+        if(max(mx1[i] / 2, mx2[i]) <= x ){
+            return true ;
         }
     }
 
-    return true ;
+    return false ;
 }
 
 
@@ -91,7 +116,7 @@ void solve() {
     vector<int> a(n) ;
     for(auto &it : a) cin>> it ;
 
-    int si = 1 ;
+    int si = 0 ;
     int ei = n ;
 
     int ans = -1 ;
@@ -104,6 +129,8 @@ void solve() {
             si = mid + 1 ;
         }
     }
+
+
 
 
     cout<< ans <<endl ;
